@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    form(method="post", action=action).edithook
+        div.row
+            label(for="name")= "Hookname"
+            input(type="text", name="name", placeholder="Hookname", required)#name= (hook.name || "")
+
+        div.row
+            label(for="branch")= "Git branch"
+            input(type="text", name="branch", placeholder="Git branch", required)#branch= (hook.branch || "")
+
+        div.row
+            label(for="path")= "Local path"
+            input(type="text", name="path", placeholder="Local repository-path", required)#path= (hook.path || "")
+
+        div.row.aright
+            input(type="submit", value="Save")

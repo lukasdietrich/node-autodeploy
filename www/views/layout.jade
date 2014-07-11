@@ -1,0 +1,17 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        title= "AutoDeploy"
+
+        link(rel="stylesheet", href="http://fonts.googleapis.com/css?family=Oxygen")
+        link(rel="stylesheet", href="/css/main.css")
+    body
+        .wrapper
+            header#header
+                h1
+                    a(href="/")= "AutoDeploy"
+                a(href="/hook/+/edit").action.add= "Add hook"
+
+            main#main
+                block content

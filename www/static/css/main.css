@@ -1,0 +1,178 @@
+html, body, h1 {
+  margin: 0;
+  padding: 0; }
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.wrapper, input {
+  font-family: "Oxygen", sans-serif;
+  font-size: 1em;
+  color: #333333; }
+
+.aright {
+  text-align: right; }
+
+i.emo {
+  display: inline-block;
+  margin: 0 1em;
+  font-style: normal;
+  font-weight: bold;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  transform: rotate(90deg); }
+
+a {
+  text-decoration: none; }
+
+header#header {
+  position: relative;
+  padding: 0 2em;
+  line-height: 6rem;
+  background: #dc5b46;
+  box-shadow: 0 0.2em 0 #c93d26;
+  overflow: hidden;
+  z-index: 9001; }
+  header#header h1 a, header#header .action {
+    color: #fdecd0; }
+  header#header h1 {
+    float: left;
+    font-size: 2em; }
+  header#header .action {
+    float: right;
+    font-size: 1.2em; }
+
+main#main {
+  width: 800px;
+  max-width: 100%;
+  margin: 1em auto;
+  padding: 0 1em; }
+  main#main .notification {
+    display: block;
+    position: absolute;
+    top: 6rem;
+    left: 2em;
+    min-width: 10em;
+    padding: 1em;
+    text-align: center;
+    background-color: #fdecd0;
+    -webkit-animation: slideout 1s 2s 1 normal forwards;
+    -moz-animation: slideout 1s 2s 1 normal forwards;
+    animation: slideout 1s 2s 1 normal forwards; }
+  main#main .nohooks {
+    display: block;
+    text-align: center;
+    color: gray; }
+  main#main .hooks {
+    list-style: none;
+    margin: 0;
+    padding: 0; }
+    main#main .hooks li {
+      line-height: 3em; }
+      main#main .hooks li .name {
+        margin-right: 1em; }
+      main#main .hooks li .url {
+        color: #1e69a2; }
+        main#main .hooks li .url::before, main#main .hooks li .url::after {
+          color: gray; }
+        main#main .hooks li .url::before {
+          content: "(";
+          margin-right: .3em; }
+        main#main .hooks li .url::after {
+          content: ")";
+          margin-left: .3em; }
+      main#main .hooks li .action {
+        float: right; }
+        main#main .hooks li .action a {
+          color: gray;
+          border-bottom: .2em solid transparent;
+          -webkit-transition-property: color, border-color;
+          -moz-transition-property: color, border-color;
+          transition-property: color, border-color;
+          -webkit-transition-duration: 0.2s;
+          -moz-transition-duration: 0.2s;
+          transition-duration: 0.2s; }
+          main#main .hooks li .action a:not(:last-child) {
+            margin-right: 1em; }
+        main#main .hooks li .action .delete:hover {
+          color: #dc5b46;
+          border-bottom-color: #dc5b46; }
+        main#main .hooks li .action .edit:hover {
+          color: #1e69a2;
+          border-bottom-color: #1e69a2; }
+      main#main .hooks li:not(:last-child) {
+        border-bottom: 0.2em solid #f4e3e0; }
+  main#main .edithook .row {
+    overflow: hidden;
+    margin: 1em 0; }
+  main#main .edithook label {
+    display: block;
+    float: left;
+    width: 7em;
+    padding: 1em .5em;
+    text-align: right; }
+  main#main .edithook input, main#main .edithook label {
+    outline: none; }
+  main#main .edithook input[type=text] {
+    display: block;
+    width: calc(100% - 7em);
+    margin: 0;
+    padding: 1em;
+    border: 0.2em solid #dc5b46;
+    border-width: 0 0 0 .5em;
+    background-color: #f2e5e2; }
+  main#main .edithook input[type=submit] {
+    margin: .5em;
+    padding: .5em 1em;
+    border: none;
+    border-radius: .2em;
+    color: #fdecd0;
+    background-color: #dc5b46;
+    cursor: pointer;
+    -webkit-transition-property: background-color, box-shadow, transform;
+    -moz-transition-property: background-color, box-shadow, transform;
+    transition-property: background-color, box-shadow, transform;
+    -webkit-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    transition-duration: 0.2s; }
+    main#main .edithook input[type=submit]:hover {
+      background-color: #c93d26;
+      box-shadow: 0 0.2em 0 #732316; }
+    main#main .edithook input[type=submit]:active {
+      -webkit-transform: translateY(0.2em);
+      -moz-transform: translateY(0.2em);
+      transform: translateY(0.2em);
+      box-shadow: 0 0 0 #c93d26; }
+
+@-webkit-keyframes slideout {
+  from {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    transform: translateY(0); }
+
+  to {
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    transform: translateY(-100%); } }
+@-moz-keyframes slideout {
+  from {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    transform: translateY(0); }
+
+  to {
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    transform: translateY(-100%); } }
+@keyframes slideout {
+  from {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    transform: translateY(0); }
+
+  to {
+    -webkit-transform: translateY(-100%);
+    -moz-transform: translateY(-100%);
+    transform: translateY(-100%); } }

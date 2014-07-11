@@ -1,0 +1,13 @@
+extends layout
+
+block content
+    if hooks.length > 0
+        ul.hooks
+            each hook in hooks
+                li
+                    span.name= hook.name
+    else
+        span.nohooks
+            | There are no hooks yet !
+            i.emo
+                | : (

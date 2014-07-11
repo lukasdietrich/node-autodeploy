@@ -1,0 +1,256 @@
+$font: "Oxygen", sans-serif;
+
+$red: #DC5B46;
+$blue: #1E69A2;
+$beige: #FDECD0;
+$grey: #333333;
+
+@mixin prefix($rule, $argument...) {
+    -webkit-#{$rule}: $argument;
+    -moz-#{$rule}: $argument;
+    #{$rule}: $argument;
+}
+
+@mixin transition($duration, $property...) {
+    @include prefix(transition-property, $property);
+    @include prefix(transition-duration, $duration);
+}
+
+html, body, h1 {
+    margin: 0;
+    padding: 0;
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.wrapper, input {
+    font-family: $font;
+    font-size: 1em;
+    color: $grey;
+}
+
+.aright {
+    text-align: right;
+}
+
+i.emo {
+    display: inline-block;
+    margin: 0 1em;
+
+    font-style: normal;
+    font-weight: bold;
+    @include prefix(transform, rotate(90deg));
+}
+
+a {
+    text-decoration: none;
+}
+
+header#header {
+    position: relative;
+    padding: 0 2em;
+    line-height: 6rem;
+    background: $red;
+    box-shadow: 0 .2em 0 darken($red, 10%);
+    overflow: hidden;
+
+    z-index: 9001; // OVER 9000 !!!
+
+    h1 a, .action {
+        color: $beige;
+    }
+
+    h1 {
+        float: left;
+        font-size: 2em;
+    }
+
+    .action {
+        float: right;
+        font-size: 1.2em;
+    }
+}
+
+main#main {
+    width: 800px;
+    max-width: 100%;
+
+    margin: 1em auto;
+    padding: 0 1em;
+
+    .notification {
+        display: block;
+        position: absolute;
+        top: 6rem;
+        left: 2em;
+
+        min-width: 10em;
+        padding: 1em;
+        text-align: center;
+
+        background-color: $beige;
+
+        @include prefix(animation, slideout 1s 2s 1 normal forwards);
+    }
+
+    .nohooks {
+        display: block;
+        text-align: center;
+        color: lighten($grey, 30%);
+    }
+
+    .hooks {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        li {
+            line-height: 3em;
+
+            .name {
+                margin-right: 1em;
+            }
+
+            .url {
+                color: $blue;
+
+                &::before, &::after {
+                    color: lighten($grey, 30%);
+                }
+
+                &::before {
+                    content: "(";
+                    margin-right: .3em;
+                }
+
+                &::after {
+                    content: ")";
+                    margin-left: .3em;
+                }
+            }
+
+            .action {
+                float: right;
+
+                a {
+                    color: lighten($grey, 30%);
+                    border-bottom: .2em solid transparent;
+
+                    @include transition(.2s, color, border-color);
+
+                    &:not(:last-child) {
+                        margin-right: 1em;
+                    }
+                }
+
+                .delete:hover {
+                    color: $red;
+                    border-bottom-color: $red;
+                }
+
+                .edit:hover {
+                    color: $blue;
+                    border-bottom-color: $blue;
+                }
+
+            }
+
+            &:not(:last-child) {
+                border-bottom: .2em solid desaturate(lighten($red, 35%), 20%);
+            }
+        }
+    }
+
+    .edithook {
+
+        .row {
+            overflow: hidden;
+            margin: 1em 0;
+        }
+
+        label {
+            display: block;
+            float: left;
+            width: 7em;
+            padding: 1em .5em;
+            text-align: right;
+        }
+
+        input, label {
+            outline: none;
+        }
+
+        input[type=text] {
+            display: block;
+            width: calc(100% - 7em);
+            margin: 0;
+            padding: 1em;
+
+            border: .2em solid $red;
+            border-width: 0 0 0 .5em;
+
+            background-color: desaturate(lighten($red, 35%), 30%);
+        }
+
+        input[type=submit] {
+            margin: .5em;
+            padding: .5em 1em;
+
+            border: none;
+            border-radius: .2em;
+
+            color: $beige;
+            background-color: $red;
+            cursor: pointer;
+
+            @include transition(.2s, background-color, box-shadow, transform);
+
+            &:hover {
+                background-color: darken($red, 10%);
+                box-shadow: 0 .2em 0 darken($red, 30%);
+            }
+
+            &:active {
+                @include prefix(transform, translateY(.2em));
+                box-shadow: 0 0 0 darken($red, 10%);
+            }
+
+        }
+
+    }
+
+}
+
+@-webkit-keyframes slideout {
+    from {
+        @include prefix(transform, translateY(0));
+    }
+
+    to {
+        @include prefix(transform, translateY(-100%));
+    }
+}
+
+@-moz-keyframes slideout {
+    from {
+        @include prefix(transform, translateY(0));
+    }
+
+    to {
+        @include prefix(transform, translateY(-100%));
+    }
+}
+
+@keyframes slideout {
+    from {
+        @include prefix(transform, translateY(0));
+    }
+
+    to {
+        @include prefix(transform, translateY(-100%));
+    }
+}
