@@ -1,5 +1,6 @@
 var git     = require("nodegit");
 var express = require("express");
+var bodyparser = require("body-parser");
 var sqlite  = require("sqlite3");
 var shortid = require("shortid");
 var crypto  = require("crypto");
@@ -17,7 +18,7 @@ var db  = new sqlite.Database(__dirname + "/data.sqlite", function (err) {
 
     db.serialize(function () {
         db.run("CREATE TABLE IF NOT EXISTS users ( name TEXT, mail TEXT, pass TEXT ) ;");
-        db.run("CREATE TABLE IF NOT EXISTS hooks ( uid INTEGER, name TEXT, key TEXT, path TEXT, branch TEXT, UNIQUE (path, branch) ) ;");
+        db.run("CREATE TABLE IF NOT EXISTS hooks ( name TEXT, key TEXT, path TEXT, branch TEXT, UNIQUE (path, branch) ) ;");
         db.run("CREATE TABLE IF NOT EXISTS logs  ( event TEXT, date INTEGER ) ;");
     });
 });
@@ -33,6 +34,7 @@ function log (text, args) {
 
 web.set("views", __dirname + "/www/views");
 web.set("view engine", "jade");
+web.use(bodyparser.urlencoded({ extended: true }));
 
 web.all("/hook/:key/deploy", function (req, res) {
     db.get("SELECT name, path, branch FROM hooks WHERE key = ? ;", [req.params.key], function (err, row) {
@@ -62,12 +64,37 @@ web.all("/hook/:key/edit", function (req, res) {
             action: sprintf("/hook/%s/edit", [shortid.generate()])
         });
     } else {
-        db.get("SELECT * FROM hooks WHERE key = ? ;", [req.params.key], function (err, row) {
-            res.render("edithook", {
-                hook: row,
-                action: sprintf("/hook/%s/edit", [req.params.key])
+        var b = req.body;
+        var n = null;
+
+        if(typeof b.name === "string" && typeof b.branch === "string" && typeof b.path === "string") {
+            db.run("INSERT OR REPLACE INTO hooks (name, key, path, branch) VALUES (?, ?, ?, ?) ;", [b.name, req.params.key, b.path, b.branch], function (err) {
+                if (err)
+                    log("ERROR: %s", [err]);
+                else
+                    log("Updated %s (branch=%s, path=%s, key=%s)", [b.name, b.branch, b.path, req.params.key]);
             });
-        });
+
+            res.render("edithook", {
+                hook: {
+                    name: b.name,
+                    key: req.params.key,
+                    path: b.path,
+                    branch: b.branch
+                },
+                action: sprintf("/hook/%s/edit", [req.params.key]),
+                notification: "Saved !"
+            });
+        } else {
+            db.get("SELECT * FROM hooks WHERE key = ? ;", [req.params.key], function (err, row) {
+                res.render("edithook", {
+                    hook: row,
+                    action: sprintf("/hook/%s/edit", [req.params.key]),
+                    notification: n
+                });
+            });
+        }
+
     }
 });
 

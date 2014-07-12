@@ -4,15 +4,15 @@ block content
     form(method="post", action=action).edithook
         div.row
             label(for="name")= "Hookname"
-            input(type="text", name="name", placeholder="Hookname", required)#name= (hook.name || "")
+            input(type="text", name="name", placeholder="Hookname", value=(hook.name || ""), required)#name
 
         div.row
             label(for="branch")= "Git branch"
-            input(type="text", name="branch", placeholder="Git branch", required)#branch= (hook.branch || "")
+            input(type="text", name="branch", placeholder="Git branch", value=(hook.branch || ""), required)#branch
 
         div.row
             label(for="path")= "Local path"
-            input(type="text", name="path", placeholder="Local repository-path", required)#path= (hook.path || "")
+            input(type="text", name="path", placeholder="Local repository-path", value=(hook.path || ""), required)#path
 
         div.row.aright
             input(type="submit", value="Save")

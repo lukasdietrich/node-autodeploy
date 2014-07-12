@@ -6,6 +6,10 @@ block content
             each hook in hooks
                 li
                     span.name= hook.name
+                    span.url= "http://" + host + "/hook/" + hook.key + "/deploy"
+                    div.action
+                        a(href="/hook/" + hook.key + "/edit").edit= "Edit"
+                        a(href="/hook/" + hook.key + "/delete").delete= "Delete"
     else
         span.nohooks
             | There are no hooks yet !
