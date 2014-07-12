@@ -14,4 +14,7 @@ html
                 a(href="/hook/+/edit").action.add= "Add hook"
 
             main#main
+                if notification
+                    .notification= notification
+
                 block content
