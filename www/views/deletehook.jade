@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    form(method="post", action=action).deletehook
+        p
+            | Are you sure you want to delete the hook
+            = hook.name
+            | ?
+
+        div.row.aright
+            a(href="/").button= "Back"
+            input(type="submit", value="I am sure !")

@@ -165,7 +165,7 @@ main#main {
         }
     }
 
-    .edithook {
+    .edithook, .deletehook {
 
         .row {
             overflow: hidden;
@@ -196,7 +196,9 @@ main#main {
             background-color: desaturate(lighten($red, 35%), 30%);
         }
 
-        input[type=submit] {
+        input[type=submit], a.button {
+            display: inline-block;
+
             margin: .5em;
             padding: .5em 1em;
 

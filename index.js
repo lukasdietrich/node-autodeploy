@@ -57,6 +57,20 @@ web.get("/", function (req, res) {
     });
 });
 
+web.post("/hook/:key/delete", function (req, res, next) {
+    db.run("DELETE FROM hooks WHERE key = ? ;", [req.params.key]);
+    res.redirect("/");
+});
+
+web.get("/hook/:key/delete", function (req, res) {
+    db.get("SELECT * FROM hooks WHERE key = ? ;", [req.params.key], function (err, row) {
+        res.render("deletehook", {
+            hook: row,
+            action: sprintf("/hook/%s/delete", [req.params.key])
+        });
+    });
+})
+
 web.all("/hook/:key/edit", function (req, res) {
     if(req.params.key === "+") {
         res.render("edithook", {

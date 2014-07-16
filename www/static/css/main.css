@@ -104,18 +104,18 @@ main#main {
           border-bottom-color: #1e69a2; }
       main#main .hooks li:not(:last-child) {
         border-bottom: 0.2em solid #f4e3e0; }
-  main#main .edithook .row {
+  main#main .edithook .row, main#main .deletehook .row {
     overflow: hidden;
     margin: 1em 0; }
-  main#main .edithook label {
+  main#main .edithook label, main#main .deletehook label {
     display: block;
     float: left;
     width: 7em;
     padding: 1em .5em;
     text-align: right; }
-  main#main .edithook input, main#main .edithook label {
+  main#main .edithook input, main#main .edithook label, main#main .deletehook input, main#main .deletehook label {
     outline: none; }
-  main#main .edithook input[type=text] {
+  main#main .edithook input[type=text], main#main .deletehook input[type=text] {
     display: block;
     width: calc(100% - 7em);
     margin: 0;
@@ -123,7 +123,8 @@ main#main {
     border: 0.2em solid #dc5b46;
     border-width: 0 0 0 .5em;
     background-color: #f2e5e2; }
-  main#main .edithook input[type=submit] {
+  main#main .edithook input[type=submit], main#main .edithook a.button, main#main .deletehook input[type=submit], main#main .deletehook a.button {
+    display: inline-block;
     margin: .5em;
     padding: .5em 1em;
     border: none;
@@ -137,10 +138,10 @@ main#main {
     -webkit-transition-duration: 0.2s;
     -moz-transition-duration: 0.2s;
     transition-duration: 0.2s; }
-    main#main .edithook input[type=submit]:hover {
+    main#main .edithook input[type=submit]:hover, main#main .edithook a.button:hover, main#main .deletehook input[type=submit]:hover, main#main .deletehook a.button:hover {
       background-color: #c93d26;
       box-shadow: 0 0.2em 0 #732316; }
-    main#main .edithook input[type=submit]:active {
+    main#main .edithook input[type=submit]:active, main#main .edithook a.button:active, main#main .deletehook input[type=submit]:active, main#main .deletehook a.button:active {
       -webkit-transform: translateY(0.2em);
       -moz-transform: translateY(0.2em);
       transform: translateY(0.2em);
